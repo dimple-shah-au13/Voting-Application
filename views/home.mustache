@@ -1,0 +1,50 @@
+<html>
+
+<head>
+
+{{> header}}
+
+
+</head>
+
+<body>
+
+<h1> Home !!! </h1>
+
+<div class="container">
+
+
+
+<form action="/api/v1/home" method="POST">
+   <div class="m-5">
+
+  <h1>Welcome to Voting Application  !!!!</h1>
+ 
+  <div class="mb-3 d-flex ">
+    <button type="submit" class="btn btn-dark justify-content-between m-5" ><a href="/api/v1/login">Login</a></button>
+    <button type="submit" class="btn btn-dark justify-content-between m-5"><a href="/api/v1/register">Register</a></button>
+  </div>
+
+
+</div>
+
+  {{#message}}
+<div class="alert alert-danger" role="alert">
+       {{message}}
+</div>
+  {{/message}}
+</form>
+
+</div>
+
+
+
+   {{> footer}}
+
+
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,71 @@
+<html>
+
+<head>
+
+{{> header}}
+
+
+</head>
+
+<body>
+
+<h1> Admin Count Page !!! </h1>
+
+
+<div class="container ">
+
+
+<form action="/api/v1/count" method="POST" >
+    <div class="mb-3 d-flex justify-content-start m-5 ">
+        <input class="form-check-input  m-2 p-2 " type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
+        <input type="text" name="username" class="form-control mb-2" placeholder="1. {{candidate1}}  Total Counts: {{count1}}">
+
+      
+      </div>
+      <div class="mb-3 d-flex justify-content-start m-5 ">
+        <input class="form-check-input  m-2 p-2" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
+        <input type="text" name="username" class="form-control mb-2" placeholder="2. {{candidate2}}  Total Counts: {{count2}}">
+
+      </div>
+
+      <div class="mb-3 d-flex justify-content-start m-5 ">
+        <input class="form-check-input  m-2 p-2" type="radio" name="exampleRadios" id="exampleRadios3" value="3" >
+        <input type="text" name="username" class="form-control mb-2" placeholder="3. {{candidate3}}  Total Counts: {{count3}}">
+
+      </div>
+
+      <div class="mb-3 d-flex justify-content-start m-5 ">
+        <input class="form-check-input  m-2 p-2" type="radio" name="exampleRadios" id="exampleRadios4" value="4" >
+        <input type="text" name="username" class="form-control mb-2" placeholder="4. {{candidate4}}  Total Counts: {{count4}}">
+
+      </div>
+
+<div class="mb-3 d-flex">
+    <button type="submit" class="btn btn-dark justify-content-between m-5"><a>Count</a></button>
+    <button type="submit" class="btn btn-dark justify-content-between m-5 "><a href="http://localhost:8000/api/v1/logout">Logout</a></button>
+</div>
+  
+
+
+  {{#message}}
+<div class="alert alert-success" role="alert">
+       {{message}}
+</div>
+  {{/message}}
+</form>
+
+
+
+</div>
+
+
+
+   {{> footer}}
+
+
+
+</body>
+
+</html>
+
+
