@@ -1,15 +1,13 @@
 import express from "express";
 import chalk from 'chalk';
 import morgan from 'morgan';
-//import pool from '../Voting-Application/database/db.js';
 import dotenv from 'dotenv';
 import votingRoutes from './routes/voting.js';
 import path from "path";
 import { fileURLToPath } from 'url';
 import userRoutes from "./routes/users.js";
 import countRoutes from "./routes/count.js";
-//import homeRoutes from "./routes/users.js";
-//import pool from "../database/db.js";
+import viewRoutes from "./routes/users.js";
 
 import mustacheExpress from 'mustache-express';
 
@@ -47,7 +45,7 @@ app.use('/css', express.static('css'));
 app.use("/api/v1/", userRoutes )
 app.use("/api/v1/", votingRoutes )
 app.use("/api/v1/", countRoutes )
-//app.use("/api/v1/", homeRoutes )
+//app.use("/api/v1/", viewRoutes )
 
 
 

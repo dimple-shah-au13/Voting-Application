@@ -15,5 +15,13 @@ const pool = new Pool({
     port: process.env.PGPORT
 })
 
-console.log(chalk.bgRedBright.black('db connected  🟢 '));
+
+pool.connect((error, result) =>{
+    try {
+        console.log(chalk.bgRedBright.black('db connected  🟢 '));
+    } catch (error) {
+        console.log(error)
+    }
+})
+   
 export default pool;    

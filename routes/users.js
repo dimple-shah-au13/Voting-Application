@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import Joi from 'joi';
 import auth from '../middlewares/auth.js';
-import userController from '../controllers/userController.js';
 const router = express.Router();
 
 router.get("/home", async (req,res) => {
@@ -13,8 +12,10 @@ router.get("/home", async (req,res) => {
   res.render("home");
 })
 
-//router.post("register", userController.register)
-router.get("/register", userController.register)
+router.get("/register",async (req,res) => {
+  res.render("register");
+})
+
 
 router.post("/register", async (req,res) => {
     //let { username, password, email, phone } = req.body;
@@ -46,7 +47,6 @@ router.post("/register", async (req,res) => {
         email: Joi.string()
             .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
         
-        //phone: Joi.number().max(10).min(7)
         phone: Joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Phone number must have 10 digits.`}).required(),
 
         role: Joi.string()
@@ -55,7 +55,6 @@ router.post("/register", async (req,res) => {
     let results = schema.validate({...req.body});
     console.log(results)
 
-    //if (!username || !password || !email || !phone) {
       if(results.error){
       errors.push({ message: results.error });
       throw errors
@@ -88,20 +87,15 @@ router.post("/register", async (req,res) => {
                     }else{
 
                     };
-                    //console.log(results.rows)
                      res.redirect("/api/v1/login")
                 }
               )
             }
-            //res.redirect("/login")
- 
         })
     }
   } catch (error) {
     console.log(error);
-  }
-
-    
+  }   
 })
 
 
@@ -116,13 +110,11 @@ router.post("/login", auth, async (req, res) => {
 
      pool.query(`SELECT * FROM users WHERE username = $1 `,  [username], async (err,results) => {
         if (err) throw err;
-        //console.log(results.rows);
 
         if(results.rows.length > 0){
             const user = results.rows[0];
 
             bcrypt.compare(password, user.password,  (err, isMatch) => {
-                //console.log(password, user.password)
                 if (err) { console.log(err + "🔴"); }
                 if (isMatch) {
                     return user;
@@ -137,21 +129,12 @@ router.post("/login", auth, async (req, res) => {
         }else{
             return ({message: "No user exists with that email address"});
         }
-
      })
-
 })
 
 
-
 router.get("/logout", (req, res) => {
-    res.cookie('jwt', 'loggedout', {
-      expires: new Date(Date.now() + 10 * 1000),
-      httpOnly: true,
-    });
-    //return res.render('home', {message: "You have successfully logged out.", color: "red"});
     return res.redirect("/api/v1/home")
-
   });
 
 
